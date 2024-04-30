@@ -6,11 +6,15 @@ app.set("views", "./views");
 app.set("view engine", "pug");
 
 app.get("/", (req, res) => {
-  res.send("Homepage");
+  res.render("client/pages/home/index", {
+    pageTitle: "Homepage",
+  });
 });
 
 app.get("/products", (req, res) => {
-  res.send("Product List");
+  res.render("client/pages/products/index", {
+    pageTitle: "Product List",
+  });
 });
 
 app.listen(port, () => {
