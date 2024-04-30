@@ -1,21 +1,15 @@
 const express = require("express");
 const app = express();
+
+const route = require("./routes/index.route");
+
 const port = 3000;
 
 app.set("views", "./views");
 app.set("view engine", "pug");
 
-app.get("/", (req, res) => {
-  res.render("client/pages/home/index", {
-    pageTitle: "Homepage",
-  });
-});
-
-app.get("/products", (req, res) => {
-  res.render("client/pages/products/index", {
-    pageTitle: "Product List",
-  });
-});
+// Routes
+route(app);
 
 app.listen(port, () => {
   console.log(`App is listening on port ${port}`);
