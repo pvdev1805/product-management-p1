@@ -1,4 +1,5 @@
 const Product = require("../../models/product.model");
+const filterHelper = require("../../helpers/filter.helper");
 
 // [GET] /admin/products/
 module.exports.index = async (req, res) => {
@@ -7,33 +8,7 @@ module.exports.index = async (req, res) => {
   };
 
   // Feature: Filter-by-state
-  const filterStatus = [
-    {
-      name: "All",
-      status: "",
-      class: "",
-    },
-    {
-      name: "Active",
-      status: "active",
-      class: "",
-    },
-    {
-      name: "Inactive",
-      status: "inactive",
-      class: "",
-    },
-  ];
-
-  if (req.query.status) {
-    const index = filterStatus.findIndex(
-      (item) => item.status == req.query.status
-    );
-    filterStatus[index].class = "active";
-  } else {
-    const index = filterStatus.findIndex((item) => item.status == "");
-    filterStatus[index].class = "active";
-  }
+  const filterStatus = filterHelper(req);
 
   if (req.query.status) {
     find.status = req.query.status;
