@@ -24,7 +24,7 @@ module.exports.index = async (req, res) => {
   // End - Feature: Search (Keyword)
 
   // Feature: Pagination
-  const countRecords = await Product.countDocuments();
+  const countRecords = await Product.countDocuments(find);
 
   const objectPagination = paginationHelper(req, countRecords);
   // End - Feature: Pagination
