@@ -40,3 +40,24 @@ if (formSearch) {
   });
 }
 // End - Form Search
+
+// Button Pagination
+const listButtonPagination = document.querySelectorAll("[button-pagination]");
+if (listButtonPagination.length > 0) {
+  let url = new URL(window.location.href);
+
+  listButtonPagination.forEach((button) => {
+    button.addEventListener("click", () => {
+      const page = button.getAttribute("button-pagination");
+
+      if (page) {
+        url.searchParams.set("page", page);
+      } else {
+        url.searchParams.delete("page");
+      }
+
+      window.location.href = url.href;
+    });
+  });
+}
+// End - Button Pagination

@@ -50,3 +50,52 @@ block main
               td
                 button(class="btn btn-warning btn-sm") Edit
                 button(class="btn btn-danger btn-sm ml-1") Delete
+
+  nav
+    ul.pagination
+      if(objectPagination.currentPage > 1)
+        li(class="page-item")
+          button(
+              class="page-link"
+              button-pagination=1
+          ) First Page
+        li(class="page-item")
+          button(
+              class="page-link"
+              button-pagination=objectPagination.currentPage - 1
+          ) Previous Page
+          
+      if(objectPagination.currentPage > 2)
+        li(class="page-item")
+          button(class="page-link") ...
+      
+      if(objectPagination.currentPage == 1)
+        - for(var i = objectPagination.currentPage; i <= objectPagination.currentPage + 2; i++)
+            li(class=`page-item ${objectPagination.currentPage == i ? "active" : ""}`)
+              button(class="page-link" button-pagination=i) #{i}
+      
+      else if(objectPagination.currentPage == objectPagination.totalPage)
+        - for(var i = objectPagination.currentPage - 2; i <= objectPagination.currentPage; i++)
+            li(class=`page-item ${objectPagination.currentPage == i ? "active" : ""}`)
+              button(class="page-link" button-pagination=i) #{i}
+      
+      else 
+        - for(var i = objectPagination.currentPage - 1; i <= objectPagination.currentPage + 1; i++)
+            li(class=`page-item ${objectPagination.currentPage == i ? "active" : ""}`)
+              button(class="page-link" button-pagination=i) #{i}
+
+      if(objectPagination.currentPage < objectPagination.totalPage - 1)
+        li(class="page-item")
+          button(class="page-link") ...
+      
+      if(objectPagination.currentPage < objectPagination.totalPage)
+        li(class="page-item")
+          button(
+              class="page-link"
+              button-pagination=objectPagination.currentPage + 1
+          ) Next Page
+        li(class="page-item")
+          button(
+              class="page-link"
+              button-pagination=objectPagination.totalPage
+          ) Last Page
