@@ -6,6 +6,7 @@ module.exports.index = async (req, res) => {
     deleted: false,
   };
 
+  // Feature: Filter-by-state
   const filterStatus = [
     {
       name: "All",
@@ -37,6 +38,14 @@ module.exports.index = async (req, res) => {
   if (req.query.status) {
     find.status = req.query.status;
   }
+  // End - Feature: Filter-by-state
+
+  // Feature: Search (Keyword)
+  if (req.query.keyword) {
+    const regex = new RegExp(req.query.keyword, "i");
+    find.title = regex;
+  }
+  // End - Feature: Search (Keyword)
 
   const products = await Product.find(find);
 
@@ -44,5 +53,6 @@ module.exports.index = async (req, res) => {
     pageTitle: "Product List",
     products: products,
     filterStatus: filterStatus,
+    keyword: req.query.keyword,
   });
 };
