@@ -151,3 +151,29 @@ if (formChangeMulti) {
   });
 }
 // End - form-change-multi
+
+// button-delete
+const listButtonDelete = document.querySelectorAll(`button[button-delete]`);
+if (listButtonDelete.length > 0) {
+  const formDeleteItem = document.querySelector(`form[form-delete-item]`);
+
+  listButtonDelete.forEach((button) => {
+    button.addEventListener("click", () => {
+      const isConfirm = confirm(
+        "Are you sure you want to delete this product?"
+      );
+
+      if (isConfirm) {
+        const id = button.getAttribute("data-id");
+        const path = formDeleteItem.getAttribute("data-path");
+
+        const action = `${path}/${id}?_method=DELETE`;
+
+        formDeleteItem.action = action;
+
+        formDeleteItem.submit();
+      }
+    });
+  });
+}
+// End - button-delete
