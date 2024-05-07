@@ -127,6 +127,8 @@ if (formChangeMulti) {
   formChangeMulti.addEventListener("submit", (event) => {
     event.preventDefault();
 
+    const type = formChangeMulti.querySelector(`select[name="type"]`).value;
+
     const listInputIdChecked = document.querySelectorAll(
       `input[name="id"]:checked`
     );
@@ -143,6 +145,15 @@ if (formChangeMulti) {
 
       const input = formChangeMulti.querySelector(`input[name="ids"]`);
       input.value = stringIds;
+
+      if (type == "delete-all") {
+        const isConfirm = confirm(
+          "Are you sure you want to delete these products?"
+        );
+        if (!isConfirm) {
+          return;
+        }
+      }
 
       formChangeMulti.submit();
     } else {
