@@ -107,6 +107,8 @@ module.exports.changeMulti = async (req, res) => {
           deleted: true,
         }
       );
+
+      req.flash("success", "Delete product successfully!");
       break;
     default:
       break;
@@ -127,6 +129,8 @@ module.exports.deleteItem = async (req, res) => {
       deleted: true,
     }
   );
+
+  req.flash("success", "Delete product successfully!");
 
   res.redirect("back");
 };
