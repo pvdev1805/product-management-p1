@@ -80,6 +80,8 @@ module.exports.changeMulti = async (req, res) => {
           status: type,
         }
       );
+
+      req.flash("success", "Change Status Successfully!");
       break;
     case "change-position":
       for (const item of ids) {
