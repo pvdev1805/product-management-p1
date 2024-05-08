@@ -197,3 +197,22 @@ if (listButtonDelete.length > 0) {
   });
 }
 // End - button-delete
+
+// show-alert
+const showAlert = document.querySelector("[show-alert]");
+if (showAlert) {
+  let time = showAlert.getAttribute("data-time");
+  time = parseInt(time);
+
+  // After ? seconds (time) --> close the alert
+  setTimeout(() => {
+    showAlert.classList.add("alert-hidden");
+  }, time);
+
+  // Click on the close-alert (x) button --> close the alert
+  const closeAlert = showAlert.querySelector("[close-alert]");
+  closeAlert.addEventListener("click", () => {
+    showAlert.classList.add("alert-hidden");
+  });
+}
+// End - show-alert
