@@ -58,6 +58,8 @@ module.exports.changeStatus = async (req, res) => {
     }
   );
 
+  req.flash("success", "Change Status Successfully!");
+
   res.redirect("back");
 };
 
