@@ -97,6 +97,8 @@ module.exports.changeMulti = async (req, res) => {
           }
         );
       }
+
+      req.flash("success", "Change Position Successfully!");
       break;
     case "delete-all":
       await Product.updateMany(
