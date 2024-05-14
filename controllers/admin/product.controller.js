@@ -150,21 +150,6 @@ module.exports.create = async (req, res) => {
 
 // [POST] /admin/products/create
 module.exports.createPost = async (req, res) => {
-  if (!req.body.title) {
-    req.flash("error", "Please enter the product title!");
-    res.redirect("back");
-    return;
-  }
-
-  if (req.body.title.length < 5) {
-    req.flash(
-      "error",
-      "Please enter at least 5 characters for the product title!"
-    );
-    res.redirect("back");
-    return;
-  }
-
   req.body.price = parseInt(req.body.price);
   req.body.discountPercentage = parseInt(req.body.discountPercentage);
   req.body.stock = parseInt(req.body.stock);
