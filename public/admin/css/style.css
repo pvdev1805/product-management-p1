@@ -78,3 +78,19 @@
   margin-left: 8px;
 }
 /* End - Close Alert */
+
+/* image-preview */
+.image-preview {
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  width: 150px;
+  height: auto;
+  overflow: hidden;
+}
+
+.image-preview[src=""] {
+  display: none;
+}
+/* End - image-preview */
