@@ -223,3 +223,18 @@ module.exports.editPatch = async (req, res) => {
   req.flash("success", "Edit Product Successfully!");
   res.redirect("back");
 };
+
+// [GET] /admin/products/detail/:id
+module.exports.detail = async (req, res) => {
+  const id = req.params.id;
+
+  const product = await Product.findOne({
+    _id: id,
+    deleted: false,
+  });
+
+  res.render("admin/pages/products/detail", {
+    pageTitle: `Product: ${product.title}`,
+    product: product,
+  });
+};
