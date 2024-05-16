@@ -172,3 +172,54 @@ module.exports.createPost = async (req, res) => {
   req.flash("success", "Create a new product successfully!");
   res.redirect(`/${systemConfig.prefixAdmin}/products`);
 };
+
+// [GET] /admin/products/edit/:id
+module.exports.edit = async (req, res) => {
+  const id = req.params.id;
+
+  const product = await Product.findOne({
+    _id: id,
+    deleted: false,
+  });
+
+  res.render("admin/pages/products/edit", {
+    pageTitle: "Edit Product",
+    product: product,
+  });
+};
+
+// [PATCH] /admin/products/edit/:id
+module.exports.editPatch = async (req, res) => {
+  const id = req.params.id;
+
+  req.body.price = parseInt(req.body.price);
+  req.body.discountPercentage = parseInt(req.body.discountPercentage);
+  req.body.stock = parseInt(req.body.stock);
+
+  if (req.body.position) {
+    req.body.position = parseInt(req.body.position);
+  } else {
+    const record = await Product.findOne({
+      _id: id,
+    });
+
+    const originalPosition = record.position;
+
+    req.body.position = parseInt(originalPosition);
+  }
+
+  if (req.file) {
+    req.body.thumbnail = `/uploads/${req.file.filename}`;
+  }
+
+  await Product.updateOne(
+    {
+      _id: id,
+      deleted: false,
+    },
+    req.body
+  );
+
+  req.flash("success", "Edit Product Successfully!");
+  res.redirect("back");
+};
